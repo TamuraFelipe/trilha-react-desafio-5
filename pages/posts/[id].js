@@ -23,12 +23,15 @@ export default function PostPage({
   posts,
   globalData,
 }) {
+
+  
   return (
     <Layout>
       <SEO
         title={`${posts.title} - ${globalData.name}`}
         description={posts.description}
       />
+      
       <Header name={globalData.name} />
       <article className="px-6 md:px-0">
         <header>
@@ -44,7 +47,13 @@ export default function PostPage({
             {posts.body}
           </article>
         </main>
+        <div style={{ transform: 'rotate(180deg)' }}>
+          <CustomLink href='/'>
+            <ArrowIcon className="mt-4" style={{ transform: 'rotate(180deg)' }}/>
+          </CustomLink>
+        </div>
       </article>
+      
       <Footer copyrightText={globalData.footerText} />
       <GradientBackground
         variant="large"
@@ -59,8 +68,8 @@ export default function PostPage({
 }
 
 export const getServerSideProps = async ({ params }) => {
-  const globalData = getGlobalData();
   const posts = await getPostBySlug(params.id);
+  const globalData = getGlobalData();
  
 
   return {
